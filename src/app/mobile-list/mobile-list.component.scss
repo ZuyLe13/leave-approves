@@ -1,0 +1,13 @@
+::ng-deep .mat-mdc-paginator-page-size-label,
+::ng-deep .mat-mdc-paginator-range-label {
+  @apply hidden;
+}
+
+.card-item {
+  @apply flex flex-col gap-[6px] px-3 py-2 mt-4 rounded-md text-[#6b778c];
+  box-shadow: 0 2px 20px 0px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-icon {
+  @apply max-w-[20px] max-h-[20px] text-[17px] mt-[-1px] border-2 border-[#77be79] rounded-full;
+}

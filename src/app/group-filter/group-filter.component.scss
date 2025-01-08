@@ -1,0 +1,70 @@
+@use "@angular/material" as mat;
+
+::ng-deep .mat-calendar {
+  @apply shadow-xl bg-white rounded-b-md;
+
+  .mat-calendar-controls {
+    @apply m-0;
+  }
+
+  .mat-calendar-content {
+    @apply mt-4;
+  }
+
+  .mat-calendar-header {
+    @apply py-2 bg-[#0053b3] text-white rounded-t-md;
+  }
+
+  .mat-calendar-table-header tr th {
+    @apply font-semibold tracking-wider;
+  }
+
+  .mat-calendar-table-header tr th:first-child,
+  .mat-calendar-table-header tr th:last-child {
+    @apply text-red-500;
+  }
+
+  .mat-calendar-arrow {
+    @apply hidden;
+  }
+}
+
+::ng-deep .mat-mdc-button .mdc-button__label {
+  @apply ml-[84px] text-white font-semibold tracking-wider;
+
+  span {
+    @apply block min-w-[120px] px-2 py-3 rounded-md;
+
+    &:hover {
+      @apply bg-[#0000001a] duration-200;
+    }
+  }
+}
+
+::ng-deep .mat-datepicker-content {
+  .mat-calendar-previous-button:not(.mat-mdc-button-disabled),
+  .mat-calendar-next-button:not(.mat-mdc-button-disabled) {
+    @apply text-white !important;
+  }
+
+  .mat-calendar-previous-button:not(.mat-mdc-button-disabled):hover,
+  .mat-calendar-next-button:not(.mat-mdc-button-disabled):hover {
+    @apply bg-[#0000001a] duration-200;
+  }
+
+  .mat-calendar-previous-button:not(.mat-mdc-button-disabled) {
+    @apply right-[200px];
+  }
+}
+
+.group-filter {
+  @apply flex lg:flex-row xs:flex-col gap-4 items-center md:p-0 xs:p-3;
+}
+
+.input-group {
+  @apply flex flex-col lg:w-[250px] xs:w-full;
+}
+
+.group-date {
+  @apply flex flex-wrap gap-4 lg:w-fit xs:w-full;
+}

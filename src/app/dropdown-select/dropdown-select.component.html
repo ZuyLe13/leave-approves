@@ -1,0 +1,33 @@
+<div
+  class="dropdown-select relative flex-item cursor-pointer"
+  (click)="isDropdownOpen = !isDropdownOpen"
+>
+  <button class="button-select" [ngClass]="{'outline-filter': isDropdownOpen,}">
+    {{ selectedItem }}
+  </button>
+
+  <div *ngIf="!isDropdownOpen" class="icon_arrow">
+    <mat-icon>arrow_drop_down</mat-icon>
+  </div>
+  <div *ngIf="isDropdownOpen" class="icon_arrow">
+    <mat-icon>arrow_drop_up</mat-icon>
+  </div>
+
+  <ul
+    *ngIf="isDropdownOpen"
+    class="dropdown-select_show"
+    (click)="$event.stopPropagation()"
+  >
+    <li
+      *ngFor="let item of items"
+      class="px-[10px] py-2"
+      [ngClass]="{
+        'bg-[#ebf5ff]': item.value === selectedItem,
+        'hover:bg-[#f5faff]': item.value !== selectedItem
+      }"
+      (click)="onItemSelect(item)"
+    >
+      {{ item.value }}
+    </li>
+  </ul>
+</div>

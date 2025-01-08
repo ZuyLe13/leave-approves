@@ -1,0 +1,103 @@
+<div class="example-container mat-elevation-z8 md:block xs:hidden">
+  <table matSort mat-table [dataSource]="dataSource">
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef style="padding: 0">
+        <mat-checkbox
+          (change)="$event ? toggleAllRows() : null"
+          [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()"
+          [aria-label]="checkboxLabel()"
+        >
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row" style="padding: 0">
+        <mat-checkbox
+          (click)="$event.stopPropagation()"
+          (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)"
+          [aria-label]="checkboxLabel(row)"
+        >
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container
+      *ngFor="let col of tableColumns; let colIndex = index"
+      matColumnDef="{{ col.columnDef }}"
+      [sticky]="col.isSticky"
+      [stickyEnd]="col.isStickyEnd"
+    >
+      <!-- Header -->
+      <th mat-header-cell *matHeaderCellDef>
+        <ng-container *ngIf="col.isSorting; else normalHeader">
+          <span mat-sort-header>{{ col.header }}</span>
+        </ng-container>
+
+        <ng-template #normalHeader>
+          {{ col.header }}
+        </ng-template>
+      </th>
+
+      <!-- Cell -->
+      <td mat-cell *matCellDef="let element">
+        <!-- Status -->
+        <ng-container *ngIf="col.columnDef === 'status'">
+          <!-- <span
+            class="font-semibold"
+            [ngSwitch]="col.cell(element)"
+            [ngClass]="{
+              'text-green-600': col.cell(element) === 'Approved',
+              'text-blue-600': col.cell(element) === 'Waiting for approval',
+              'text-red-600': col.cell(element) === 'Cancelled'
+            }"
+          >
+            {{ col.cell(element) }}
+          </span> -->
+          <span class="font-semibold" [ngSwitch]="col.cell(element)">
+            <span *ngSwitchCase="'Approved'" class="text-green-600">
+              {{ col.cell(element) }}
+            </span>
+            <span *ngSwitchCase="'Waiting for approval'" class="text-blue-600">
+              {{ col.cell(element) }}
+            </span>
+            <span *ngSwitchCase="'Cancelled'" class="text-red-600">
+              {{ col.cell(element) }}
+            </span>
+            <span *ngSwitchDefault class="text-black">
+              {{ col.cell(element) }}
+            </span>
+          </span>
+        </ng-container>
+
+        <!-- Reason -->
+        <ng-container *ngIf="col.columnDef !== 'status'">
+          <span class="truncate max-w-[250px]">
+            {{ col.cell(element) }}
+          </span>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <!-- No data display -->
+  <div *ngIf="noData" class="py-[14px] px-[26px]">No data to display</div>
+  <div class="seperate"></div>
+
+  <mat-paginator
+    class="bg-white"
+    [pageSizeOptions]="[5, 10, 20]"
+    [showFirstLastButtons]="showFirstLastButtons"
+  >
+  </mat-paginator>
+</div>
+
+<!-- Card -->
+<div class="md:hidden xs:block px-3">
+  <div class="py-3" *ngIf="noData">No data to display</div>
+  <app-mobile-list *ngIf="!noData" [tableData]="filteredWithDateData" />
+</div>

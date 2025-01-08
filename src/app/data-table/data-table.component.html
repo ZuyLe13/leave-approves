@@ -1,0 +1,111 @@
+<!-- Table -->
+<div class="example-container mat-elevation-z8 md:block xs:hidden">
+  <table matSort mat-table [dataSource]="dataSource">
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select" sticky>
+      <th mat-header-cell *matHeaderCellDef class="w-2">
+        <mat-checkbox
+          [disableRipple]="true"
+          (change)="$event ? toggleAllRows() : null"
+          [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()"
+          [aria-label]="checkboxLabel()"
+        >
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox
+          (click)="$event.stopPropagation()"
+          (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)"
+          [aria-label]="checkboxLabel(row)"
+        >
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <!-- Employee Column -->
+    <ng-container matColumnDef="employee" sticky>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Employee</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.employee }}
+      </td>
+    </ng-container>
+
+    <!-- Type Column -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Type</th>
+      <td mat-cell *matCellDef="let element">{{ element.type }}</td>
+    </ng-container>
+
+    <!-- Day Column -->
+    <ng-container matColumnDef="day">
+      <th mat-header-cell *matHeaderCellDef>Day</th>
+      <td mat-cell *matCellDef="let element">{{ element.day }}</td>
+    </ng-container>
+
+    <!-- Gap Time Column -->
+    <ng-container matColumnDef="gapTime">
+      <th mat-header-cell *matHeaderCellDef>Gap Time</th>
+      <td mat-cell *matCellDef="let element">{{ element.gapTime }}</td>
+    </ng-container>
+
+    <!-- Reason Column -->
+    <ng-container matColumnDef="reason">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Reason</th>
+      <td mat-cell *matCellDef="let element">{{ element.reason }}</td>
+    </ng-container>
+
+    <!-- Approved By Column -->
+    <ng-container matColumnDef="approvedBy">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Approved By</th>
+      <td mat-cell *matCellDef="let element">{{ element.approvedBy }}</td>
+    </ng-container>
+
+    <!-- Approved Time Column -->
+    <ng-container matColumnDef="approvedTime">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Approved Time</th>
+      <td mat-cell *matCellDef="let element">{{ element.approvedTime }}</td>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status" stickyEnd>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+      <td mat-cell *matCellDef="let element">
+        @if (element.status === 'Approved') {
+        <span class="font-semibold text-green-600">{{ element.status }}</span>
+        } @else if (element.status === 'Waiting for approval' || element.status
+        === 'Waiting for cancel') {
+        <span class="font-semibold text-blue-600">{{ element.status }}</span>
+        } @else {
+        <span class="font-semibold text-red-600">{{ element.status }}</span>
+        }
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      (click)="selection.toggle(row)"
+    ></tr>
+  </table>
+
+  <!-- No data display -->
+  <div *ngIf="noData" class="py-[14px] px-[26px]">No data to display</div>
+  <div class="seperate"></div>
+
+  <mat-paginator
+    class="bg-white"
+    [pageSizeOptions]="[5, 10, 20]"
+    [showFirstLastButtons]="showFirstLastButtons"
+  >
+  </mat-paginator>
+</div>
+
+<!-- Card -->
+<div class="md:hidden xs:block px-3">
+  <div class="p-3" *ngIf="noData">No data to display</div>
+  <app-mobile-list *ngIf="!noData" [tableData]="filteredWithDateData" />
+</div>

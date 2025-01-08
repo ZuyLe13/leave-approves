@@ -1,0 +1,124 @@
+::ng-deep .mat-sort-header-container .mat-sort-header-arrow {
+  @apply relative transition-none;
+}
+
+::ng-deep
+  .mat-sort-header-container:not(.mat-sort-header-sorted)
+  .mat-sort-header-arrow {
+  @apply m-0 opacity-[0.54] translate-y-0 !important;
+}
+
+::ng-deep
+  .mat-sort-header-container.mat-sort-header-sorted
+  .mat-sort-header-arrow {
+  @apply max-w-[16px] max-h-[16px] ml-1 invisible;
+}
+
+::ng-deep
+  .mat-sort-header-container:not(.mat-sort-header-sorted)
+  .mat-sort-header-arrow {
+  @apply size-4 bg-[length:17px_17px] bg-no-repeat bg-center;
+  background-image: url("data:image/svg+xml,%3Csvg%20%20xmlns=%22http://www.w3.org/2000/svg%22%20%20width=%2224%22%20%20height=%2224%22%20%20viewBox=%220%200%2024%2024%22%20%20fill=%22none%22%20%20stroke=%22currentColor%22%20%20stroke-width=%222%22%20%20stroke-linecap=%22round%22%20%20stroke-linejoin=%22round%22%20%20class=%22icon%20icon-tabler%20icons-tabler-outline%20icon-tabler-selector%22%3E%3Cpath%20stroke=%22none%22%20d=%22M0%200h24v24H0z%22%20fill=%22none%22/%3E%3Cpath%20d=%22M8%209l4%20-4l4%204%22%20/%3E%3Cpath%20d=%22M16%2015l-4%204l-4%20-4%22%20/%3E%3C/svg%3E");
+}
+
+::ng-deep
+  .mat-sort-header-sorted.mat-sort-header-ascending
+  .mat-sort-header-arrow::after,
+::ng-deep
+  .mat-sort-header-sorted.mat-sort-header-descending
+  .mat-sort-header-arrow::after {
+  @apply content-[""] absolute top-[-1px] right-[-1px] size-4 bg-[length:14px_14px] bg-no-repeat visible;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2224%22%20height=%2224%22%20viewBox=%220%200%2024%2024%22%20fill=%22none%22%20stroke=%22currentColor%22%20stroke-width=%222%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22%3E%3Cpath%20stroke=%22none%22%20d=%22M0%200h24v24H0z%22%20fill=%22none%22/%3E%3Cpath%20d=%22M6%2015l6%20-6l6%206%22/%3E%3C/svg%3E");
+}
+
+::ng-deep
+  .mat-sort-header-sorted.mat-sort-header-descending
+  .mat-sort-header-arrow::after {
+  @apply left-[1px] top-[-2px];
+}
+
+::ng-deep
+  .mat-sort-header-container:not(.mat-sort-header-sorted)
+  .mat-sort-header-arrow
+  svg {
+  @apply hidden;
+}
+
+// Checkbox
+::ng-deep .mat-mdc-checkbox .mat-accent {
+  @apply bg-white !important;
+}
+
+::ng-deep .mdc-checkbox__background {
+  @apply border-[#e4e4e4] !important;
+}
+
+::ng-deep
+  .mdc-checkbox__native-control:checked
+  ~ .mdc-checkbox__background
+  .mdc-checkbox__checkmark {
+  @apply bg-white text-[#009688];
+}
+
+::ng-deep
+  .mdc-checkbox
+  .mdc-checkbox__native-control:focus:checked
+  ~ .mdc-checkbox__ripple {
+  @apply opacity-0 bg-transparent !important;
+}
+
+::ng-deep
+  .mdc-checkbox
+  .mdc-checkbox__native-control:focus
+  ~ .mdc-checkbox__ripple,
+::ng-deep .mdc-checkbox:hover .mdc-checkbox__ripple,
+::ng-deep
+  .mdc-checkbox__native-control:enabled:indeterminate
+  ~ .mdc-checkbox__background {
+  @apply bg-white !important;
+}
+
+::ng-deep .mdc-checkbox {
+  @apply border-none !important;
+}
+
+::ng-deep
+  .mdc-checkbox__native-control:focus:focus:checked
+  ~ .mdc-checkbox__background,
+.mdc-checkbox__native-control:focus:focus:indeterminate
+  ~ .mdc-checkbox__background {
+  @apply bg-transparent !important;
+}
+
+::ng-deep .mdc-checkbox__mixedmark {
+  @apply border-[#009688] !important;
+}
+
+::ng-deep .mat-mdc-paginator-page-size-label {
+  @apply hidden;
+}
+
+.example-container {
+  @apply max-w-full overflow-auto;
+}
+
+table {
+  @apply w-[800px] mt-4 bg-white whitespace-nowrap;
+}
+
+th {
+  @apply text-[#42526e] font-semibold border-b-[1px] border-[#ddd];
+}
+
+tr,
+td {
+  @apply border-[#ddd];
+}
+
+::ng-deep .mat-mdc-paginator-container {
+  @apply font-Lato font-semibold bg-white !important;
+}
+
+.seperate {
+  @apply w-full border-t border-[#ccc] mb-3;
+}

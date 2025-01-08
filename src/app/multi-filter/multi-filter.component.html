@@ -1,0 +1,239 @@
+<div class="relative flex flex-col">
+  <span class="text-span">Filter</span>
+  <div
+    class="multi-filter"
+    [ngClass]="{
+      'outline-filter': isDropdownOpen
+    }"
+    (click)="toggle($event, 'menu')"
+  >
+    <span class="min-w-[66px] -mt-[1px] pl-1">Filter by</span>
+
+    <!-- Div to display filter by -->
+    <div class="truncate flex-item flex-1 gap-1">
+      <span class="flex-item h-[28px]" *ngFor="let item of selectedValues">
+        <span class="select-filter" *ngIf="item.type === 'status'">
+          <strong>Status: </strong>
+          {{ item.value }}
+        </span>
+
+        <span class="select-filter" *ngIf="item.type === 'employee'">
+          <strong>Employee: </strong>
+          {{ item.value }}
+        </span>
+
+        <span class="select-filter" *ngIf="item.type === 'userStatus'">
+          <strong>User Status: </strong>
+          {{ item.value }}
+        </span>
+
+        <span
+          class="bg-[#edf5fe] h-[24px] rounded-r-[4px]"
+          (click)="removeSelectedValue(item.value)"
+        >
+          <mat-icon class="icon close-icon hover:bg-[#d1e8ff]">
+            close
+          </mat-icon>
+        </span>
+      </span>
+    </div>
+
+    <span
+      class="ml-1 h-[24px]"
+      [ngClass]="{ hidden: !isShowClose }"
+      (click)="clearAllSelectedValues()"
+    >
+      <mat-icon class="icon close-all hover:text-red-600"> close </mat-icon>
+    </span>
+
+    <span class="inline-block mt-2 ml-2 cursor-pointer">
+      <mat-icon>arrow_drop_down</mat-icon>
+    </span>
+  </div>
+
+  <!-- Dropdown -->
+  <div class="dropdown-menu" *ngIf="showState['menu']">
+    <span class="filter-by">FILTER BY</span>
+    <div class="flex flex-col py-1">
+      <div>
+        <button class="btn" (click)="toggle($event, 'status')">STATUS</button>
+
+        <!-- Selected -->
+        <div
+          class="selected"
+          *ngFor="let item of selectedValues"
+          (click)="removeSelectedValue(item.value)"
+        >
+          @if (item.type === 'status') {
+          <mat-icon class="check-box">check_box</mat-icon>
+          <span class="block">
+            {{ item.value }}
+          </span>
+          }
+        </div>
+      </div>
+      <div>
+        <button class="btn" (click)="toggle($event, 'employee')">
+          EMPLOYEE
+        </button>
+
+        <!-- Selected -->
+        <div
+          class="selected"
+          *ngFor="let item of selectedValues"
+          (click)="removeSelectedValue(item.value)"
+        >
+          @if (item.type === 'employee') {
+          <mat-icon class="check-box">check_box</mat-icon>
+          <span class="block">
+            {{ item.value }}
+          </span>
+          }
+        </div>
+      </div>
+      <div>
+        <button class="btn" (click)="toggle($event, 'userStatus')">
+          USER STATUS
+        </button>
+
+        <!-- Selected -->
+        <div
+          class="selected"
+          *ngFor="let item of selectedValues"
+          (click)="removeSelectedValue(item.value)"
+        >
+          @if (item.type === 'userStatus') {
+          <mat-icon class="check-box">check_box</mat-icon>
+          <span class="block">
+            {{ item.value }}
+          </span>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dropdown Status -->
+  <div class="dropdown-menu" *ngIf="showState['status']">
+    <div>
+      <button class="absolute top-2 left-2" (click)="toggle($event, 'menu')">
+        <mat-icon class="icon-arrow-left"> keyboard_arrow_left </mat-icon>
+      </button>
+      <span class="filter-by">STATUS</span>
+    </div>
+
+    <div class="py-3">
+      <div class="px-3">
+        <app-dropdown-select
+          [items]="fakeStatusData"
+          [selectedItem]="fakeStatusData[0].value"
+          (selectionChange)="onSelectChange($event, 'status')"
+        />
+      </div>
+
+      <span class="dropdown-span pl-3"> Search and select to filter by. </span>
+
+      <!-- Selected -->
+      <div>
+        <span class="block mt-2 ml-3" *ngIf="hasStatusItems('status')"
+          >SELECTED</span
+        >
+
+        <div
+          class="selected"
+          *ngFor="let item of selectedValues"
+          (click)="removeSelectedValue(item.value)"
+        >
+          @if (item.type === 'status') {
+          <mat-icon class="check-box">check_box</mat-icon>
+          <span class="block">
+            {{ item.value }}
+          </span>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dropdown Employee -->
+  <div class="dropdown-menu" *ngIf="showState['employee']">
+    <div>
+      <button class="absolute top-2 left-2" (click)="toggle($event, 'menu')">
+        <mat-icon class="icon-arrow-left"> keyboard_arrow_left </mat-icon>
+      </button>
+      <span class="filter-by">EMPLOYEE</span>
+    </div>
+
+    <div class="py-3">
+      <div class="px-3">
+        <app-dropdown-select
+          [items]="fakeEmployeeData"
+          [selectedItem]="fakeEmployeeData[0].value"
+          (selectionChange)="onSelectChange($event, 'employee')"
+        />
+      </div>
+      <span class="dropdown-span pl-3"> Search and select to filter by. </span>
+
+      <!-- Selected -->
+      <div>
+        <span class="block mt-2 ml-3" *ngIf="hasStatusItems('employee')"
+          >SELECTED</span
+        >
+
+        <div
+          class="selected"
+          *ngFor="let item of selectedValues"
+          (click)="removeSelectedValue(item.value)"
+        >
+          @if (item.type === 'employee') {
+          <mat-icon class="check-box">check_box</mat-icon>
+          <span class="block">
+            {{ item.value }}
+          </span>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dropdown User Status -->
+  <div class="dropdown-menu" *ngIf="showState['userStatus']">
+    <div>
+      <button class="absolute top-2 left-2" (click)="toggle($event, 'menu')">
+        <mat-icon class="icon-arrow-left"> keyboard_arrow_left </mat-icon>
+      </button>
+      <span class="filter-by">USER STATUS</span>
+    </div>
+
+    <div class="py-3">
+      <div class="px-3">
+        <app-dropdown-select
+          [items]="fakeUserStatusData"
+          [selectedItem]="fakeUserStatusData[0].value"
+          (selectionChange)="onSelectChange($event, 'userStatus')"
+        />
+      </div>
+      <span class="dropdown-span pl-3"> Search and select to filter by. </span>
+
+      <!-- Selected -->
+      <div>
+        <span class="block mt-2 ml-3" *ngIf="hasStatusItems('userStatus')"
+          >SELECTED</span
+        >
+
+        <div
+          class="selected"
+          *ngFor="let item of selectedValues"
+          (click)="removeSelectedValue(item.value)"
+        >
+          @if (item.type === 'userStatus') {
+          <mat-icon class="check-box">check_box</mat-icon>
+          <span class="block">
+            {{ item.value }}
+          </span>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

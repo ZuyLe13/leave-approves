@@ -1,0 +1,11 @@
+.button-select {
+  @apply flex-1 font-normal text-start h-[34px] px-[10px] bg-white border-[#cddbe3] border-[1px] rounded-[4px];
+}
+
+.dropdown-select_show {
+  @apply absolute w-full top-[38px] bg-white border-[1px] border-[#cddbe3] rounded-[4px] z-10 overflow-hidden;
+}
+
+.icon_arrow {
+  @apply absolute top-1 right-1;
+}

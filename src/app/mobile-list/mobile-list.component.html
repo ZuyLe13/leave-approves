@@ -1,0 +1,114 @@
+<div class="card-item" *ngFor="let item of paginatedList">
+  <div class="font-bold">{{ item.employee }}</div>
+  <div class="flex-item gap-2">
+    <div class="size-[18px] bg-[#ff6771] rounded-full"></div>
+    <span class="font-bold">{{ item.type }}</span>
+  </div>
+  <span>{{ item.day }}</span>
+  <div>
+    <strong>Gap time:</strong>
+    &nbsp; {{ item.gapTime }}
+  </div>
+  <div>
+    <span>
+      <strong>Reason:</strong>
+      &nbsp; {{ item.reason }}
+    </span>
+  </div>
+  <div class="flex-item gap-3 mt-1">
+    <div
+      class="flex-item gap-1 text-blue-600"
+      *ngIf="item.status === 'Waiting for approval'"
+    >
+      <mat-icon>timelapse</mat-icon>
+      <span class="font-semibold">
+        {{ item.status }}
+      </span>
+    </div>
+    <div
+      class="flex-item gap-1 text-[#77be79]"
+      *ngIf="item.status === 'Approved'"
+    >
+      <mat-icon>check_circle_outline</mat-icon>
+      <span class="font-semibold">
+        {{ item.status }}
+      </span>
+    </div>
+    <div
+      class="flex-item gap-1 text-red-600"
+      *ngIf="item.status === 'Rejected' && 'Cancelled'"
+    >
+      <mat-icon>highlight_off</mat-icon>
+      <span class="font-semibold">
+        {{ item.status }}
+      </span>
+    </div>
+
+    <div
+      class="flex-item gap-1 text-red-600"
+      *ngIf="item.status === 'Cancelled'"
+    >
+      <mat-icon>highlight_off</mat-icon>
+      <span class="font-semibold">
+        {{ item.status }}
+      </span>
+    </div>
+
+    <div class="flex-item gap-1" *ngIf="item.status !== 'Waiting for approval'">
+      <mat-icon class="max-h-[18px] mr-2 max-w-[18px] text-[18px] rotate-180">
+        keyboard_backspace
+      </mat-icon>
+      <img
+        src="https://staging-xcorp-upload.s3.ap-southeast-1.amazonaws.com/094ecf62b81c96f22ab1aa5a0e4d3fc1/avatar/81/avatar.jpg?2024-09-13T04:16:13.315972787"
+        alt="Avatar"
+        class="size-5 border border-[#ccc] rounded-full"
+      />
+      <span class="text-[#0053b3]">{{ item.approvedBy }}</span>
+    </div>
+  </div>
+
+  <div class="flex-item gap-1 mt-1">
+    <mat-icon>access_time</mat-icon>
+    <span>
+      <strong>Approved Time:</strong>
+      &nbsp; {{ item.approvedTime }}
+    </span>
+  </div>
+
+  <div class="flex-item">
+    <strong>Status:</strong>
+    <span
+      class="text-blue-600 font-semibold"
+      *ngIf="item.status === 'Waiting for approval'"
+    >
+      &nbsp; {{ item.status }}
+    </span>
+    <span
+      class="text-[#77be79] font-semibold"
+      *ngIf="item.status === 'Approved'"
+    >
+      &nbsp; {{ item.status }}
+    </span>
+    <span class="text-red-600 font-semibold" *ngIf="item.status === 'Rejected'">
+      &nbsp; {{ item.status }}
+    </span>
+    <span
+      class="text-red-600 font-semibold"
+      *ngIf="item.status === 'Cancelled'"
+    >
+      &nbsp; {{ item.status }}
+    </span>
+  </div>
+</div>
+
+<div class="sticky flex-item justify-between bottom-0 px-2 pb-[10px] bg-white">
+  <span class="text-span">{{ tableData.length }} total</span>
+  <mat-paginator
+    [length]="tableData.length"
+    [pageSize]="pageSize"
+    [showFirstLastButtons]="showFirstLastButtons"
+    [pageSizeOptions]="[5, 10, 20]"
+    (page)="onPageChange($event)"
+  >
+  </mat-paginator>
+</div>
