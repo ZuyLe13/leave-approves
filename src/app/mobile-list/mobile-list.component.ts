@@ -1,8 +1,7 @@
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { EmployeeRecord } from '../shared/Employee';
 
 @Component({
   selector: 'app-mobile-list',

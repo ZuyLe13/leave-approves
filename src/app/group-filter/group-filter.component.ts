@@ -11,6 +11,7 @@ import {
   PeriodEnum,
   MY_FORMATS,
   SelectedValue,
+  PeriodTypes,
 } from '../shared/shared.const';
 import * as _moment from 'moment';
 import { CommonModule } from '@angular/common';
@@ -47,15 +48,7 @@ const moment = _rollupMoment || _moment;
   styleUrl: './group-filter.component.scss',
 })
 export class GroupFilterComponent implements OnInit {
-  PeriodTypes: PeriodType[] = [
-    { value: 'Today' },
-    { value: 'This Week' },
-    { value: 'This Month' },
-    { value: 'Last Month' },
-    { value: 'Next Month' },
-    { value: 'This Year' },
-    { value: 'Custom' },
-  ];
+  periodTypes = PeriodTypes;
 
   fromDate!: Date | null;
   toDate!: Date | null;

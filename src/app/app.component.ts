@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { Column } from './shared/column';
 import { TABLE_EMPLOYEE_COLUMNS } from './shared/table-employee';
-import { FAKE_DATA, EmployeeRecord } from './shared/Employee';
+import { FAKE_DATA, EmployeeRecord } from './shared/employee';
 import { SelectedValue } from './shared/shared.const';
 import { GroupFilterComponent } from './group-filter/group-filter.component';
-import { DataTableComponent } from './data-table/data-table.component';
 import { TableComponent } from './table/table.component';
 
 @Component({

@@ -57,3 +57,24 @@ span {
 .icon {
   @apply text-[16px] py-[5px] text-center rounded-r-[4px] cursor-pointer duration-300;
 }
+
+.mat-mdc-paginator-page-size-label,
+.mat-mdc-paginator-range-label {
+  @apply hidden;
+}
+
+.mdc-notched-outline {
+  @apply max-w-[70%] !important;
+}
+
+.mat-mdc-select-trigger {
+  @apply w-[60%] !important;
+}
+
+div.mat-mdc-select-panel {
+  @apply my-[2px] w-[70%] p-0 bg-white shadow-none border border-[#ccc] rounded !important;
+}
+
+.mat-mdc-paginator-page-size-select {
+  @apply -mx-5 !important;
+}

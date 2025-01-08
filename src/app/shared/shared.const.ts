@@ -26,6 +26,16 @@ export enum PeriodEnum {
   CUSTOM = 'Custom',
 }
 
+export const PeriodTypes: PeriodType[] = [
+  { value: 'Today' },
+  { value: 'This Week' },
+  { value: 'This Month' },
+  { value: 'Last Month' },
+  { value: 'Next Month' },
+  { value: 'This Year' },
+  { value: 'Custom' },
+];
+
 export const MY_FORMATS = {
   parse: {
     dateInput: 'LL',

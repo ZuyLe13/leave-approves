@@ -9,7 +9,7 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { EmployeeRecord, FAKE_DATA } from '../shared/Employee';
+import { EmployeeRecord, FAKE_DATA } from '../shared/employee';
 import { SelectedValue } from '../shared/shared.const';
 import moment from 'moment';
 import { CommonModule } from '@angular/common';

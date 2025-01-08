@@ -4,9 +4,11 @@ import {
   Output,
   EventEmitter,
   HostListener,
+  SimpleChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { SelectedValue } from '../shared/shared.const';
 
 @Component({
   selector: 'app-dropdown-select',
@@ -17,9 +19,16 @@ import { MatIconModule } from '@angular/material/icon';
 export class DropdownSelectComponent<T extends { value: string }> {
   @Input() items: T[] = [];
   @Input() selectedItem!: any;
+  @Input() selectedValues: SelectedValue[] = [];
   @Output() selectionChange = new EventEmitter<T>();
 
   isDropdownOpen = false;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['selectedValues']) {
+      console.log('Updated selectedValues:', this.selectedValues);
+    }
+  }
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {

@@ -98,3 +98,7 @@ td {
 .seperate {
   @apply w-full border-t border-[#ccc] mb-3;
 }
+
+.status-icon {
+  @apply text-[20px] max-w-[20px] max-h-[20px];
+}

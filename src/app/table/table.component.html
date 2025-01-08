@@ -1,7 +1,7 @@
 <div class="example-container mat-elevation-z8 md:block xs:hidden">
   <table matSort mat-table [dataSource]="dataSource">
     <!-- Checkbox Column -->
-    <ng-container matColumnDef="select">
+    <ng-container matColumnDef="select" sticky>
       <th mat-header-cell *matHeaderCellDef style="padding: 0">
         <mat-checkbox
           (change)="$event ? toggleAllRows() : null"
@@ -41,38 +41,77 @@
 
       <!-- Cell -->
       <td mat-cell *matCellDef="let element">
+        <!-- Type -->
+        <ng-container *ngIf="col.columnDef === 'type'">
+          <span
+            class="flex-item gap-1"
+            *ngIf="
+              col.cell(element) === 'WFH' ||
+              col.cell(element) === 'Internship WFH'
+            "
+          >
+            <span class="size-[15px] bg-[#aba1ff] rounded-full"></span>
+            <span>{{ col.cell(element) }}</span>
+          </span>
+          <span
+            class="flex-item gap-1"
+            *ngIf="
+              col.cell(element) === 'Annual Leave' ||
+              col.cell(element) === 'Wedding'
+            "
+          >
+            <span class="size-[15px] bg-[#ff6771] rounded-full"></span>
+            <span>{{ col.cell(element) }}</span>
+          </span>
+          <span
+            class="flex-item gap-1"
+            *ngIf="col.cell(element) === 'Internship Leave'"
+          >
+            <span class="size-[15px] bg-[#bec94d] rounded-full"></span>
+            <span>{{ col.cell(element) }}</span>
+          </span>
+        </ng-container>
+
         <!-- Status -->
         <ng-container *ngIf="col.columnDef === 'status'">
-          <!-- <span
-            class="font-semibold"
-            [ngSwitch]="col.cell(element)"
-            [ngClass]="{
-              'text-green-600': col.cell(element) === 'Approved',
-              'text-blue-600': col.cell(element) === 'Waiting for approval',
-              'text-red-600': col.cell(element) === 'Cancelled'
-            }"
-          >
-            {{ col.cell(element) }}
-          </span> -->
-          <span class="font-semibold" [ngSwitch]="col.cell(element)">
-            <span *ngSwitchCase="'Approved'" class="text-green-600">
+          <span class="flex-item gap-1">
+            @if (col.cell(element) === 'Waiting for approval') {
+            <mat-icon class="status-icon text-blue-600">timelapse</mat-icon>
+            <span class="text-blue-600">
               {{ col.cell(element) }}
             </span>
-            <span *ngSwitchCase="'Waiting for approval'" class="text-blue-600">
+            } @else if (col.cell(element) === 'Approved' || col.cell(element)
+            === 'Approve Cancelled') {
+            <mat-icon class="status-icon text-green-600">
+              check_circle_outline
+            </mat-icon>
+            <span class="text-green-600">
               {{ col.cell(element) }}
             </span>
-            <span *ngSwitchCase="'Cancelled'" class="text-red-600">
+            } @else {
+            <mat-icon class="status-icon text-red-600">highlight_off</mat-icon>
+            <span class="text-red-600">
               {{ col.cell(element) }}
             </span>
-            <span *ngSwitchDefault class="text-black">
-              {{ col.cell(element) }}
-            </span>
+            }
           </span>
         </ng-container>
 
         <!-- Reason -->
-        <ng-container *ngIf="col.columnDef !== 'status'">
+        <ng-container *ngIf="col.columnDef === 'reason'">
           <span class="truncate max-w-[250px]">
+            {{ col.cell(element) }}
+          </span>
+        </ng-container>
+
+        <ng-container
+          *ngIf="
+            col.columnDef !== 'type' &&
+            col.columnDef !== 'reason' &&
+            col.columnDef !== 'status'
+          "
+        >
+          <span>
             {{ col.cell(element) }}
           </span>
         </ng-container>
@@ -87,9 +126,10 @@
   <!-- No data display -->
   <div *ngIf="noData" class="py-[14px] px-[26px]">No data to display</div>
   <div class="seperate"></div>
+</div>
 
+<div class="bg-white md:block xs:hidden">
   <mat-paginator
-    class="bg-white"
     [pageSizeOptions]="[5, 10, 20]"
     [showFirstLastButtons]="showFirstLastButtons"
   >

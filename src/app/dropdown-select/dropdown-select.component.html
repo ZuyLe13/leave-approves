@@ -18,7 +18,7 @@
     class="dropdown-select_show"
     (click)="$event.stopPropagation()"
   >
-    <li
+    <!-- <li
       *ngFor="let item of items"
       class="px-[10px] py-2"
       [ngClass]="{
@@ -28,6 +28,25 @@
       (click)="onItemSelect(item)"
     >
       {{ item.value }}
-    </li>
+    </li> -->
+    <div
+      class="flex-item"
+      *ngFor="let item of items"
+      [ngClass]="{
+        'bg-[#ebf5ff]': item.value === selectedItem,
+        'hover:bg-[#f5faff]': item.value !== selectedItem
+      }"
+    >
+      <span
+        *ngIf="item.value === 'employee' || item.value === 'userStatus'"
+        class="size-[20px] bg-slate-400 rounded-full"
+      ></span>
+      <li
+        class="flex-1 px-[10px] py-2 z-10 font-normal"
+        (click)="onItemSelect(item)"
+      >
+        {{ item.value }}
+      </li>
+    </div>
   </ul>
 </div>

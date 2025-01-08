@@ -6,13 +6,12 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { GenericItem, SelectedValue } from '../shared/shared.const';
+import { SelectedValue } from '../shared/shared.const';
 import { MatIconModule } from '@angular/material/icon';
 import { DropdownSelectComponent } from '../dropdown-select/dropdown-select.component';
+import { employeeData, statusData, userStatusData } from '../shared/status';
 
 type ToggleState<T extends string> = Record<T, boolean>;
-
-type FakeData = GenericItem<string>;
 
 type StateKeys = 'menu' | 'status' | 'employee' | 'userStatus';
 
@@ -23,29 +22,10 @@ type StateKeys = 'menu' | 'status' | 'employee' | 'userStatus';
   styleUrl: './multi-filter.component.scss',
 })
 export class MultiFilterComponent {
-  fakeStatusData: FakeData[] = [
-    { value: 'Waiting for approval' },
-    { value: 'Approved' },
-    { value: 'Rejected' },
-    { value: 'Cancelled' },
-    { value: 'Waiting for cancel' },
-    { value: 'Approve cancelled' },
-    { value: 'Reject cancelled' },
-  ];
-
-  fakeEmployeeData: FakeData[] = [
-    { value: 'Le Anh Duy' },
-    { value: 'Le Van B' },
-    { value: 'Nguyen Van A' },
-    { value: 'Employee 4' },
-    { value: 'Employee 5' },
-  ];
-
-  fakeUserStatusData: FakeData[] = [
-    { value: 'Active' },
-    { value: 'Inactive' },
-    { value: 'All' },
-  ];
+  // Fake data
+  fakeStatusData = statusData;
+  fakeEmployeeData = employeeData;
+  fakeUserStatusData = userStatusData;
 
   showState: ToggleState<StateKeys> = {
     menu: false,
@@ -56,8 +36,8 @@ export class MultiFilterComponent {
 
   @Output() selectedValuesChange = new EventEmitter<SelectedValue[]>();
 
-  isDropdownOpen: boolean = false;
   selectedValues: SelectedValue[] = [];
+  isDropdownOpen: boolean = false;
 
   constructor(private elementRef: ElementRef) {}
 
@@ -98,6 +78,12 @@ export class MultiFilterComponent {
 
   onSelectChange(selected: { value: string }, type: string): void {
     const selectedValue = selected.value;
+
+    if (type === 'userStatus') {
+      this.selectedValues = this.selectedValues.filter(
+        (item) => item.type !== type
+      );
+    }
 
     this.selectedValues = [
       ...new Map(

@@ -52,10 +52,10 @@ export const FAKE_DATA: EmployeeRecord[] = [
   },
   {
     employee: 'Le Anh Duy',
-    type: 'Internship Leave',
+    type: 'Annual Leave',
     day: '2024-12-23',
     gapTime: '4h',
-    reason: 'em xin off vì có lịch học ở trường ',
+    reason: 'em xin off vì có lịch học ở trường',
     approvedBy: 'Phuoc Dang',
     approvedTime: '2024-12-22',
     status: Status.Approved,
@@ -82,7 +82,7 @@ export const FAKE_DATA: EmployeeRecord[] = [
   },
   {
     employee: 'Le Van B',
-    type: 'WFH',
+    type: 'Wedding',
     day: '2024-12-23',
     gapTime: 'Full day',
     reason: 'Off',

@@ -54,7 +54,7 @@ export class TableComponent<T> implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.applyCombinedFilter();
   }
 
