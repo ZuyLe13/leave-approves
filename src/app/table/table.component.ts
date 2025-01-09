@@ -5,12 +5,11 @@ import {
   Output,
   OnInit,
   ViewChild,
-  SimpleChanges,
   EventEmitter,
 } from '@angular/core';
 import moment from 'moment';
 import { RouterModule } from '@angular/router';
-import { Column } from '../shared/column';
+import { Column } from '../shared/table-column';
 import { SelectedValue } from '../shared/shared.const';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,6 +19,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { MobileListComponent } from '../mobile-list/mobile-list.component';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { typeLeaveColors, statusColors } from '../shared/color';
 
 @Component({
   selector: 'app-table',
@@ -103,7 +103,6 @@ export class TableComponent<T> implements AfterViewInit, OnInit {
 
     this.noData = this.filteredWithDateData.length === 0;
 
-    // Emit data for mobile
     this.filteredDataForMobile.emit(this.filteredWithDateData);
 
     this.dataSource.data = this.filteredWithDateData;
@@ -129,6 +128,16 @@ export class TableComponent<T> implements AfterViewInit, OnInit {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row`;
+  }
+
+  getTypeLeaveColor(type: string): string {
+    return typeLeaveColors[type] || 'bg-[#e0e0e0]';
+  }
+
+  getStatusConfig(status: string): { icon: string; color: string } {
+    return (
+      statusColors[status] || { icon: 'error_outline', color: 'text-gray-600' }
+    );
   }
 
   ngAfterViewInit() {

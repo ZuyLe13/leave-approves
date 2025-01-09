@@ -61,10 +61,6 @@
   @apply border-none text-[#009688];
 }
 
-::ng-deep .mdc-checkbox__mixedmark {
-  @apply border-[#009688] !important;
-}
-
 ::ng-deep
   .mdc-checkbox__native-control:enabled:checked
   ~ .mdc-checkbox__background,

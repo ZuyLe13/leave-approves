@@ -1,8 +1,11 @@
 export interface Column {
   columnDef: string;
   header: string;
-  cell: (element: Record<string, any>) => string;
-  isSorting?: boolean;
+  cell: any;
+  sortable?: boolean;
   isSticky?: boolean;
   isStickyEnd?: boolean;
+  customRendering?: boolean;
+  isType?: boolean;
+  isStatus?: boolean;
 }

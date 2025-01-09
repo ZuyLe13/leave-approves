@@ -10,9 +10,9 @@ import {
   DateRange,
   PeriodEnum,
   MY_FORMATS,
-  SelectedValue,
   PeriodTypes,
-} from '../shared/shared.const';
+} from '../shared/date';
+import { SelectedValue } from '../shared/shared.const';
 import * as _moment from 'moment';
 import { CommonModule } from '@angular/common';
 import { default as _rollupMoment } from 'moment';

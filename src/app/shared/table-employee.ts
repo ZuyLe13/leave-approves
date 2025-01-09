@@ -1,4 +1,4 @@
-import { Column } from './column';
+import { Column } from './table-column';
 
 const createCell = (key: string) => (element: Record<string, any>) =>
   `${element[key]}`;
@@ -8,13 +8,14 @@ export const TABLE_EMPLOYEE_COLUMNS: Column[] = [
     columnDef: 'employee',
     header: 'Employee',
     cell: createCell('employee'),
-    isSorting: true,
+    sortable: true,
     isSticky: true,
   },
   {
     columnDef: 'type',
     header: 'Type',
     cell: createCell('type'),
+    isType: true,
   },
   {
     columnDef: 'day',
@@ -30,25 +31,26 @@ export const TABLE_EMPLOYEE_COLUMNS: Column[] = [
     columnDef: 'reason',
     header: 'Reason',
     cell: createCell('reason'),
-    isSorting: true,
+    sortable: true,
   },
   {
     columnDef: 'approvedBy',
     header: 'Approved By',
     cell: createCell('approvedBy'),
-    isSorting: true,
+    sortable: true,
   },
   {
     columnDef: 'approvedTime',
     header: 'Approved Time',
     cell: createCell('approvedTime'),
-    isSorting: true,
+    sortable: true,
   },
   {
     columnDef: 'status',
     header: 'Status',
     cell: createCell('status'),
-    isSorting: true,
+    sortable: true,
     isStickyEnd: true,
+    isStatus: true,
   },
 ];

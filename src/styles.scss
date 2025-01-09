@@ -78,3 +78,7 @@ div.mat-mdc-select-panel {
 .mat-mdc-paginator-page-size-select {
   @apply -mx-5 !important;
 }
+
+.leave-status-circle {
+  @apply size-[15px] rounded-full;
+}
